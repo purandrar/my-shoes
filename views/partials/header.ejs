@@ -1,0 +1,42 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">MyShoes</a>
+  
+    <div class="collapse navbar-collapse py-2">
+      <ul class="navbar-nav mr-auto">
+        <% if (typeof pageInfo.session.user != "undefined") { %>
+          <li class="nav-item <%= pageInfo.title.includes(pageInfo.session.user.name) ? 'active' : '' %>">
+            <a class="nav-link" href="/mylist">MyList</a>
+          </li>
+        <% } %>
+        <li class="nav-item <%= pageInfo.title == 'Community' ? 'active' : '' %>">
+          <a class="nav-link" href="/community">Community</a>
+        </li>
+        <li class="nav-item <%= pageInfo.title == 'Explore' ? 'active' : '' %>">
+          <a class="nav-link" href="/explore">Explore</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <% if (typeof pageInfo.session.user != "undefined") { %>
+          <a class="btn btn-outline-light my-2 my-sm-0" href="/user/logout">Logout</a>
+        <% } else { %>
+          <a class="btn btn-outline-light my-2 my-sm-0" href="/user/login">Login</a>
+        <% } %>
+      </form>
+    </div>
+  </nav>
+
+  <section class="jumbotron text-center">
+    <% if (typeof pageInfo.session.user != "undefined") { %>
+      <div class="container">
+        <h1 class="jumbotron-heading"><%= `Welcome, ${helpers.addPrefix(pageInfo.session.user.name, pageInfo.session.user.gender)}.` %></h1>
+        <p class="lead text-muted">You are your choice.</p>
+      </div>
+    <% } else { %>
+      <div class="container">
+        <h1 class="jumbotron-heading">Shoes never felt so good.</h1>
+        <p class="lead text-muted">You are your choice.</p>
+      </div>
+    <% } %>
+  </section>
+</header>
